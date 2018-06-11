@@ -1,4 +1,4 @@
-package com.wl.proxy.common;
+package com.wl.proxy.jdk.common;
 
 public interface TicketInterface {
     public void findTicket();

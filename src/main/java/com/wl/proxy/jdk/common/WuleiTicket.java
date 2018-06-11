@@ -1,4 +1,4 @@
-package com.wl.proxy.common;
+package com.wl.proxy.jdk.common;
 
 
 //被代理
