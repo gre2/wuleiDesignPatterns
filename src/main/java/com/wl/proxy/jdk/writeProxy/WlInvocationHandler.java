@@ -1,4 +1,8 @@
 package com.wl.proxy.jdk.writeProxy;
 
-public class WlInvocationHandler {
+import java.lang.reflect.Method;
+
+public interface WlInvocationHandler {
+
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
 }
