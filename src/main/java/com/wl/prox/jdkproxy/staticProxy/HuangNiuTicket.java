@@ -1,7 +1,7 @@
-package com.wl.proxy.jdk.staticProxy;
+package com.wl.prox.jdkproxy.staticProxy;
 
-import com.wl.proxy.jdk.common.TicketInterface;
-import com.wl.proxy.jdk.common.WuleiTicket;
+import com.wl.prox.jdkproxy.common.TicketInterface;
+import com.wl.prox.jdkproxy.common.WuleiTicket;
 
 //代理人
 public class HuangNiuTicket implements TicketInterface {

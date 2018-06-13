@@ -1,6 +1,6 @@
-package com.wl.proxy.jdk.writeProxy;
+package com.wl.prox.jdkproxy.writeProxy;
 
-import com.wl.proxy.jdk.common.WuleiTicket;
+import com.wl.prox.jdkproxy.common.WuleiTicket;
 
 import java.lang.reflect.Method;
 

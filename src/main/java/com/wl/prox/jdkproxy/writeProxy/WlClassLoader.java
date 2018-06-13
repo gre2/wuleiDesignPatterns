@@ -1,4 +1,4 @@
-package com.wl.proxy.jdk.writeProxy;
+package com.wl.prox.jdkproxy.writeProxy;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

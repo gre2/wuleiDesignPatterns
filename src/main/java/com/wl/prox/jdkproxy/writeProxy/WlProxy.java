@@ -1,12 +1,12 @@
-package com.wl.proxy.jdk.writeProxy;
+package com.wl.prox.jdkproxy.writeProxy;
 
-import javax.tools.JavaCompiler;
-import javax.tools.StandardJavaFileManager;
-import javax.tools.ToolProvider;
+import javax.tools.*;
+import javax.tools.JavaCompiler.CompilationTask;
 import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class WlProxy {
 
@@ -25,10 +25,17 @@ public class WlProxy {
         //3.编译java文件，生成class
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager manager = compiler.getStandardFileManager(null, null, null);
-        Iterable iterable = manager.getJavaFileObjects(f);
+        Iterable iterable = manager.getJavaFileObjectsFromFiles(Arrays.asList(f));
 
-        JavaCompiler.CompilationTask task = compiler.getTask(null, manager, null, null, null, iterable);
-        task.call();
+        DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
+        CompilationTask task = compiler.getTask(null, manager, diagnostics, null, null, iterable);
+        boolean flag = task.call();//通过返回值知道是否编译class成功
+        //如果失败，会提示哪里失败了
+        //https://docs.oracle.com/javase/7/docs/api/javax/tools/JavaCompiler.html
+//        for (Diagnostic diagnostic : diagnostics.getDiagnostics())
+//            System.out.format("Error on line %d in %s%n",
+//                    diagnostic.getLineNumber(),
+//                    diagnostic.getSource().toString());
         manager.close();
         //4.加载到内存（jvm）
         //5.返回被代理后的代理对象
@@ -40,9 +47,9 @@ public class WlProxy {
 
     private static String generateSrc(Class<?> anInterface) {
         StringBuffer src = new StringBuffer();
-        src.append("package com.wl.proxy.jdk.writeProxy;" + ln);
+        src.append("package com.wl.prox.jdkproxy.writeProxy;" + ln);
         src.append("import java.lang.reflect.Method;" + ln);
-        src.append("public class $Proxy0 implements" + anInterface.getName() + "{" + ln);
+        src.append("public class $Proxy0 implements " + anInterface.getName() + "{" + ln);
         src.append("public WlInvocationHandler h;" + ln);
         src.append("public $Proxy0(WlInvocationHandler h) {" + ln);
         src.append("this.h=h;" + ln);
@@ -50,7 +57,7 @@ public class WlProxy {
         for (Method method : anInterface.getMethods()) {
             src.append("public " + method.getReturnType() + " " + method.getName() + "(){" + ln);
             src.append("try{" + ln);
-            src.append("Method m=" + anInterface.getName() + ".class.getMethod(\"" + method.getName() + "\"),new Class[]{});" + ln);
+            src.append("Method m= " + anInterface.getName() + ".class.getMethod(\"" + method.getName() + "\",new Class[]{});" + ln);
             src.append("this.h.invoke(this,m,null);" + ln);
             src.append("}catch(Throwable e){e.printStackTrace();}" + ln);
             src.append("}" + ln);

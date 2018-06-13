@@ -1,7 +1,7 @@
-package com.wl.proxy.jdk.dynamicProxy;
+package com.wl.prox.jdkproxy.dynamicProxy;
 
-import com.wl.proxy.jdk.common.TicketInterface;
-import com.wl.proxy.jdk.common.WuleiTicket;
+import com.wl.prox.jdkproxy.common.TicketInterface;
+import com.wl.prox.jdkproxy.common.WuleiTicket;
 import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;

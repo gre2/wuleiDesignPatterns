@@ -1,6 +1,6 @@
-package com.wl.proxy.jdk.dynamicProxy;
+package com.wl.prox.jdkproxy.dynamicProxy;
 
-import com.wl.proxy.jdk.common.WuleiTicket;
+import com.wl.prox.jdkproxy.common.WuleiTicket;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
