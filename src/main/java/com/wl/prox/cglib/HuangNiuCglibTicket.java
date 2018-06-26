@@ -7,6 +7,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 //CGLib底层采用ASM字节码生成框架
+//多态
 public class HuangNiuCglibTicket implements MethodInterceptor {
 
 

@@ -1,4 +1,4 @@
-package com.wl.factory.func;
+package com.wl.factory.facmethod;
 
 import com.wl.factory.common.Car;
 
@@ -10,5 +10,5 @@ public interface Factory {
     //必须配备安全带、安全气囊
     //轮胎的耐磨程度
     //可以在每个类里面分别实现
-    Car getCar();
+    Car getCar(Class clazz) throws Exception;
 }
